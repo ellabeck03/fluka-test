@@ -1,0 +1,98 @@
+# flair project file
+Version: 300
+Mode: fluka
+md5: 9743e84ce5c3fd059969dc1d24d77fb7
+Input:
+DEFAULTS PRECISIO
+BEAM PROTON -0.3,,, 0 0
+	@select=8
+BEAMPOS , 0 0 -0.01
+MATERIAL LITHIUM 3,, 0.534
+GEOBEGIN COMBNAME
+RCC lithium 0 0 0 0 0 0.1 100
+	@select=9
+RCC world 0 0 -10 0 0 20 200
+END
+REGION lithium
+	+lithium
+REGION vacuum
+	-lithium +world 
+REGION world
+	-world 
+GEOEND
+ASSIGNMA , LITHIUM lithium
+ASSIGNMA , VACUUM vacuum
+ASSIGNMA , BLCKHOLE world
+USRBDX neutrons 101 NEUTRON 25 lithium vacuum 62.8 1 0 1 6 0 1
+START , 100000,,, 0
+EndInput
+
+Page: Input
+plotengine: Gnuplot
+
+# Run information
+Run: <default>
+	Last:     10
+	Status:   3
+	StartRun: 1744729060.299471
+	open:     1
+
+	# USRxxx data file: fluka_test_0.bnn
+	Data: \I_\U\e
+		Unit: 0
+		Type: usrbin
+	End
+End
+Run: first_run
+	Status:   3
+	StartRun: 1746781811.499694
+	open:     1
+End
+
+# Plots information
+Plot: Red
+	Type: Geometry
+	basisu: 0 0 1
+	basisv: 1 0 0
+	coord: Z-X
+	extends: 0.005705700798053036 0.003188276445942363
+	group: Geometry
+	layer: Lattice
+	origin: 0.000495066 2 -0.00529447
+End
+Plot: Green
+	Type: Geometry
+	basisu: 0.0542572 0.997941 -0.0342171
+	basisv: -0.996085 0.0516975 -0.0717119
+	extends: 207.35999999999976 115.8702545454544
+	group: Geometry
+	layer: 3D
+	origin: 12.3047 29.9486 12.6027
+End
+Plot: Blue
+	Type: Geometry
+	basisu: 0 0 1
+	coord: Z-Y
+	extends: 1.8113925905964456 1.0121842233514684
+	group: Geometry
+	layer: Lattice
+	origin: 0 0.0117615 -0.184948
+End
+Plot: Magenta
+	Type: Geometry
+	basisv: 0 -1 0
+	coord: X-Y
+	extends: 0.08164534041559576 0.04562242658374503
+	group: Geometry
+	layer: Lattice
+	origin: 0.0423425 -0.0026748 41.4155
+End
+Plot: fluka_test_plot
+	Type: USRBIN
+	cblog: 1
+	cbtics: 1
+	datafile: fluka_test001_fort.23
+	grid: 0
+	hist: 2D Projection
+	title: Plot USRBIN
+End
