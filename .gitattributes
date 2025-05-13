@@ -1,0 +1,5 @@
+# Treat FLUKA files as Fortran code
+*.fort.25 linguist-language=Fortran
+*.swp      linguist-language=Fortran
+*.inp      linguist-language=Fortran
+*.flair    linguist-language=Fortran
